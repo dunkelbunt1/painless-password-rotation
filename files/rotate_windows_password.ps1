@@ -17,9 +17,9 @@ if (-not (Get-LocalUser $USERNAME)) {
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 # Import some environment variables.
-$VAULT_ADDR = $env:VAULT_ADDR
-$VAULT_TOKEN = $env:VAULT_TOKEN
-$HOSTNAME = $env:computername
+$VAULT_ADDR = $args[2]
+$VAULT_TOKEN = $args[1]
+$HOSTNAME = $args[0]
 
 # Renew our token before we do anything else.
 Invoke-RestMethod -Headers @{"X-Vault-Token" = ${VAULT_TOKEN}} -Method POST -Uri ${VAULT_ADDR}/v1/auth/token/renew-self
